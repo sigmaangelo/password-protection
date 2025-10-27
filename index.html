@@ -30,11 +30,11 @@
 
     <script>
         // Password is: mySecretPassword
-        const encodedPassword = "bXlTZWNyZXRQYXNzd29yZA=="; // Base64 encoded password
+        const Password = "bXlTZWNyZXRQYXNzd29yZA=="; // Base64 encoded password
 
         function checkPassword() {
             const inputPassword = document.getElementById('password').value;
-            const decodedPassword = atob(encodedPassword);
+            const decodedPassword = atob(Password);
             if (inputPassword === decodedPassword) {
                 document.getElementById('content').style.display = 'block';
                 document.body.style.backgroundColor = 'green';
