@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Protected Page</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        #content {
+            display: none;
+            background-color: green;
+            color: white;
+            padding: 20px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="login">
+        <input type="password" id="password" placeholder="Enter Password">
+        <button onclick="checkPassword()">Submit</button>
+    </div>
+    <div id="content">Welcome to the protected page!</div>
+
+    <script>
+        // Password is: mySecretPassword
+        const encodedPassword = "bXlTZWNyZXRQYXNzd29yZA=="; // Base64 encoded password
+
+        function checkPassword() {
+            const inputPassword = document.getElementById('password').value;
+            const decodedPassword = atob(encodedPassword);
+            if (inputPassword === decodedPassword) {
+                document.getElementById('content').style.display = 'block';
+                document.body.style.backgroundColor = 'green';
+            } else {
+                alert('Incorrect Password');
+            }
+        }
+    </script>
+</body>
+</html>
