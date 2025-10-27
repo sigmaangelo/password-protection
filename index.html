@@ -12,32 +12,39 @@
             height: 100vh;
             background-color: #f0f0f0;
         }
-        #content {
+        #message {
             display: none;
-            padding: 20px;
-            background-color: green;
-            color: white;
             font-size: 24px;
+            color: green;
         }
     </style>
-</head>
-<body>
-    <div id="content">Welcome to the protected page!</div>
     <script>
-        // Password: mySecretPassword
-        const encodedPassword = "U2VjcmV0UGFzc3dvcmQ="; // Method: Custom Base32 Encoding
-        const userPassword = prompt("Enter the password:");
-
-        function decodePassword(encoded) {
-            // Decoding method: Custom Base32 Decoding
-            return atob(encoded);
+        // Password: mySecret123
+        const Password = "c3VwZXJzZWNyZXQxMjM="; // Method: Custom encoding (use a decoding function to reverse)
+        
+        function Password(encoded) {
+            let decoded = '';
+            for (let i = 0; i < encoded.length; i++) {
+                decoded += String.fromCharCode(encoded.charCodeAt(i) - 3); // Simple shift encoding
+            }
+            return decoded;
         }
 
-        if (userPassword === decodePassword(encodedPassword)) {
-            document.getElementById('content').style.display = 'block';
-        } else {
-            alert("Incorrect password!");
+        function checkPassword() {
+            const inputPassword = document.getElementById('passwordInput').value;
+            if (inputPassword === decodePassword(encodedPassword)) {
+                document.getElementById('message').style.display = 'block';
+            } else {
+                alert('Incorrect password. Please try again.');
+            }
         }
     </script>
+</head>
+<body>
+    <div>
+        <input type="password" id="passwordInput" placeholder="Enter Password">
+        <button onclick="checkPassword()">Submit</button>
+        <div id="message">Access Granted!</div>
+    </div>
 </body>
 </html>
