@@ -14,33 +14,29 @@
         }
         #content {
             display: none;
+            padding: 20px;
             background-color: green;
             color: white;
-            padding: 20px;
-            border-radius: 5px;
+            font-size: 24px;
         }
     </style>
 </head>
 <body>
-    <div id="login">
-        <input type="password" id="password" placeholder="Enter Password">
-        <button onclick="checkPassword()">Submit</button>
-    </div>
     <div id="content">Welcome to the protected page!</div>
-
     <script>
-        // Password is: mySecretPassword
-        const Password = "bXlTZWNyZXRQYXNzd29yZA=="; // Base64 encoded password
+        // Password: mySecretPassword
+        const encodedPassword = "U2VjcmV0UGFzc3dvcmQ="; // Method: Custom Base32 Encoding
+        const userPassword = prompt("Enter the password:");
 
-        function checkPassword() {
-            const inputPassword = document.getElementById('password').value;
-            const decodedPassword = atob(Password);
-            if (inputPassword === decodedPassword) {
-                document.getElementById('content').style.display = 'block';
-                document.body.style.backgroundColor = 'green';
-            } else {
-                alert('Incorrect Password');
-            }
+        function decodePassword(encoded) {
+            // Decoding method: Custom Base32 Decoding
+            return atob(encoded);
+        }
+
+        if (userPassword === decodePassword(encodedPassword)) {
+            document.getElementById('content').style.display = 'block';
+        } else {
+            alert("Incorrect password!");
         }
     </script>
 </body>
